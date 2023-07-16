@@ -1,8 +1,8 @@
 <!DOCTYPE html>
-<html lang="en">
+<html lang="en" xmlns:th="http://www.thymeleaf.org">
 <head>
     <meta charset="UTF-8">
-    <title>게시글 리스트 페이지</title>
+    <title>posting list page</title>
 </head>
 <style>
   .layout{
@@ -16,14 +16,16 @@
     <table>
       <thead>
         <tr>
-            <th>글번호</th>
-            <th>제목</th>
+            <th>post number</th>
+            <th>title</th>
         </tr>
       </thead>
       <tbody>
-        <tr>
-            <td>1</td>
-            <td>제목입니다</td>
+        <tr th:each="board : ${list}">
+            <td th:text="${board.id}">1</td>
+            <td>
+                title<a th:text="${board.id}" th:href="@{/board/view(id=${board.id})}"></a>
+            </td>
         </tr>
       </tbody>
     </table>
