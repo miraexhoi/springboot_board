@@ -22,11 +22,14 @@ public class BoardController {
     }
 
     @PostMapping("/board/writepro")
-    public String boardWritePro(Board board) {
+    public String boardWritePro(Board board, Model model) {
 
         boardService.write(board);
 
-        return "";
+        model.addAttribute("message","Writing has been completed.");
+        model.addAttribute("searchUrl","/board/list");
+
+        return "message";
     }
     @GetMapping("/board/list")
     public String boardList(Model model){
@@ -43,12 +46,12 @@ public class BoardController {
         boardService.boardDelete(id);
         return "redirect:/board/list";
     }
-    @GetMapping("board/modify/{id}")
+    @GetMapping("/board/modify/{id}")
     public String boardModify(@PathVariable("id") Integer id, Model model) {
         model.addAttribute("board", boardService.boardView(id));
         return "boardmodify";
     }
-    @PostMapping("board/update/{id}")
+    @PostMapping("/board/update/{id}")
     public String boardUpdate(@PathVariable("id") Integer id, Board board) {
         Board boardTemp = boardService.boardView(id);
         boardTemp.setTitle(board.getTitle());
