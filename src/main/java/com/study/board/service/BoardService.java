@@ -4,6 +4,7 @@ import com.study.board.entity.Board;
 import com.study.board.repository.BoardRepository;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.stereotype.Service;
+import org.springframework.web.multipart.MultipartFile;
 
 import java.util.List;
 
@@ -14,17 +15,21 @@ public class BoardService {
     private BoardRepository boardRepository;
 
     // 글 작성 처리
-    public void write(Board board){
+    public void write(Board board, MultipartFile file){
+
+        String projectPath = System.getProperty("user.dir");
         boardRepository.save(board);
     }
 
     // 게시글 리스트 처리
     public List<Board> boardList() {
+
         return boardRepository.findAll();
     }
 
     // 특정 게시글 물러오기
     public Board boardView(Integer id) {
+
         return boardRepository.findById(id).get();
     }
 
