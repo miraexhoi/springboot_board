@@ -6,7 +6,9 @@ import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.stereotype.Service;
 import org.springframework.web.multipart.MultipartFile;
 
+import java.io.File;
 import java.util.List;
+import java.util.UUID;
 
 
 @Service
@@ -15,9 +17,21 @@ public class BoardService {
     private BoardRepository boardRepository;
 
     // 글 작성 처리
-    public void write(Board board, MultipartFile file){
+    public void write(Board board, MultipartFile file) throws Exception{
 
-        String projectPath = System.getProperty("user.dir");
+        String projectPath = System.getProperty("user.dir") + "\\src\\main\\sources\\static\\files";
+
+        UUID uuid = UUID.randomUUID();
+
+        String fileName = uuid + "" + file.getOriginalFilename();
+
+        Fi le saveFile = new File(projectPath, fileName);
+
+        file.transferTo(saveFile);
+
+        board.setFilename(fileName);
+        board.setFilepath("/files/"+fileName);
+
         boardRepository.save(board);
     }
 
