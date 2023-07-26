@@ -25,7 +25,7 @@ public class BoardService {
 
         String fileName = uuid + "" + file.getOriginalFilename();
 
-        Fi le saveFile = new File(projectPath, fileName);
+        File saveFile = new File(projectPath, fileName);
 
         file.transferTo(saveFile);
 
