@@ -4,33 +4,47 @@
     <meta charset="UTF-8">
     <title>posting list page</title>
 </head>
+
 <style>
-  .layout{
-    width: 500px;
-    margin: 0 auto;
-    margin-top: 40px;
-  }
+
+    .layout {
+        width : 500px;
+        margin : 0 auto;
+        margin-top : 40px;
+    }
+
 </style>
+
 <body>
-  <div class="layout">
+
+<div class="layout">
+
     <table>
-      <thead>
+        <thead>
         <tr>
             <th>post number</th>
             <th>title</th>
         </tr>
-      </thead>
-      <tbody>
+        </thead>
+        <tbody>
         <tr th:each="board : ${list}">
             <td th:text="${board.id}">1</td>
             <td>
-                title<a th:text="${board.id}" th:href="@{/board/view(id=${board.id})}"></a>
+                <a th:text="${board.title}" th:href="@{/board/view(id=${board.id})}"></a>
             </td>
         </tr>
-      </tbody>
+        </tbody>
     </table>
 
-  </div>
+    <th:block th:each="page : ${#numbers.sequence(startPage, endPage)}">
+        <a th:if="${page != nowPage}" th:href="@{/board/list(page = ${page - 1}, searchKeyword = ${param.searchKeyword})}" th:text="${page}"></a>
+        <strong th:if="${page == nowPage}" th:text="${page}" style="color : red"></strong>
+    </th:block>
+    <form th:action="@{/board/list}" method="get">
+        <input type="text" name="searchKeyword">
+        <button type="submit">search</button>
+    </form>
+</div>
 
 </body>
 </html>

@@ -5,10 +5,10 @@
     <title>post detail page</title>
 </head>
 <body>
+
 <h1 th:text="${board.title}">title</h1>
 <p th:text="${board.content}">contents</p>
 <a th:href="@{${board.filepath}}">download</a>
-<a th:href="@{/board/modify/{id}(id=${board.id})}">edit</a>
-<a th:href="@{/board/delete(id=${board.id})}">delete</a>
+<a th:href="@{/board/modify/{id}(id = ${board.id})}">edit</a>
 </body>
 </html>
