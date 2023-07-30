@@ -6,30 +6,34 @@
 </head>
 
 <style>
-    .layout{
-        width: 500px;
-        margin: 0 auto;
-        margin-top: 40px;
+
+    .layout {
+        width : 500px;
+        margin : 0 auto;
+        margin-top : 40px;
     }
+
     .layout input {
-        width: 100%;
-        box-sizing: border-box;
+        width : 100%;
+        box-sizing : border-box
     }
+
     .layout textarea {
-        width: 100%;
-        margin-top: 10px;
-        min-height: 300px;
+        width : 100%;
+        margin-top : 10px;
+        min-height : 300px;
     }
+
 </style>
 
 <body>
-    <div class="layout">
-        <form action="/board/writepro" method="post" enctype="multipart/form-data">
-            <input name="title" type="text">
-            <textarea name="content"></textarea>
-            <input type="file" name="file">
-            <button type="submit">write</button>
-        </form>
-    </div>
+<div class="layout">
+    <form action="/board/writepro" method="post" enctype="multipart/form-data">
+        <input name="title" type="text">
+        <textarea name="content"></textarea>
+        <input type="file" name="file">
+        <button type="submit">post</button>
+    </form>
+</div>
 </body>
 </html>
