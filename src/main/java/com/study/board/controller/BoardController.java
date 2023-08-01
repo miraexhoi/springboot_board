@@ -2,6 +2,7 @@ package com.study.board.controller;
 
 import com.study.board.entity.Board;
 import com.study.board.service.BoardService;
+import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.data.domain.Page;
 import org.springframework.data.domain.Pageable;
 import org.springframework.data.domain.Sort;
@@ -11,19 +12,19 @@ import org.springframework.ui.Model;
 import org.springframework.web.bind.annotation.GetMapping;
 import org.springframework.web.bind.annotation.PathVariable;
 import org.springframework.web.bind.annotation.PostMapping;
+import org.springframework.web.bind.annotation.ResponseBody;
 import org.springframework.web.multipart.MultipartFile;
+
+import java.io.IOException;
 
 @Controller
 public class BoardController {
 
 
-    private final BoardService boardService;
+    @Autowired
+    private BoardService boardService;
 
-    public BoardController(BoardService boardService) {
-        this.boardService = boardService;
-    }
-
-    @GetMapping("/board/write") //localhost:8080/board/write
+    @GetMapping("/board/write") //localhost:8090/board/write
     public String boardWriteForm() {
 
         return "boardwrite";
@@ -34,7 +35,7 @@ public class BoardController {
 
         boardService.write(board, file);
 
-        model.addAttribute("message", "postin completed");
+        model.addAttribute("message", "글 작성이 완료되었습니다.");
         model.addAttribute("searchUrl", "/board/list");
 
         return "message";
@@ -45,7 +46,7 @@ public class BoardController {
                             @PageableDefault(page = 0, size = 10, sort = "id", direction = Sort.Direction.DESC) Pageable pageable,
                             String searchKeyword) {
 
-        Page<Board> list;
+        Page<Board> list = null;
 
         if(searchKeyword == null) {
             list = boardService.boardList(pageable);
