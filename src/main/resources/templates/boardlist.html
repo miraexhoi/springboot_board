@@ -2,7 +2,7 @@
 <html lang="en" xmlns:th="http://www.thymeleaf.org">
 <head>
     <meta charset="UTF-8">
-    <title>posting list page</title>
+    <title>Post List Page</title>
 </head>
 
 <style>
@@ -22,8 +22,8 @@
     <table>
         <thead>
         <tr>
-            <th>post number</th>
-            <th>title</th>
+            <th>Post Number</th>
+            <th>Title</th>
         </tr>
         </thead>
         <tbody>
@@ -38,12 +38,13 @@
 
     <th:block th:each="page : ${#numbers.sequence(startPage, endPage)}">
         <a th:if="${page != nowPage}" th:href="@{/board/list(page = ${page - 1}, searchKeyword = ${param.searchKeyword})}" th:text="${page}"></a>
-        <strong th:if="${page == nowPage}" th:text="${page}" style="color : red"></strong>
+        <strong th:if="${page == nowPage}" th:text="${page}" style="color : #ff0000"></strong>
     </th:block>
     <form th:action="@{/board/list}" method="get">
-        <input type="text" name="searchKeyword">
+        <input type="text" id="searchKeyword" name="searchKeyword">
         <button type="submit">search</button>
     </form>
+
 </div>
 
 </body>
